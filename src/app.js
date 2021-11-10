@@ -18,8 +18,9 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
+// 将public目录注册为静态资源目录
 app.use(require('koa-static')(__dirname + '/public'))
-
+// 使用ejs模板引擎
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
@@ -32,7 +33,7 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-// routes
+// routes注册路由
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
